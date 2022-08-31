@@ -21,10 +21,11 @@ let UsuariosService = class UsuariosService {
     constructor(usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
     }
-    findUsuario() {
-        return {
-            message: 'Hi'
-        };
+    findUsuarios() {
+        return this.usuarioRepositorio.find();
+    }
+    findUsuario(email) {
+        return this.usuarioRepositorio.findOneBy({ email: email });
     }
     createUser(createUsuario) {
         const newUser = this.usuarioRepositorio.create(createUsuario);

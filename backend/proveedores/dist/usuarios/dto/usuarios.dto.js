@@ -38,7 +38,7 @@ __decorate([
     __metadata("design:type", String)
 ], UsuariosDTO.prototype, "calle", void 0);
 __decorate([
-    (0, class_validator_1.IsNumberString)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UsuariosDTO.prototype, "numero", void 0);
 __decorate([

@@ -21,7 +21,7 @@ export class UsuariosDTO{
     calle:string;
     
     
-    @IsNumberString()
+    @IsNumber()
     numero:number;
     
     @IsNumberString()

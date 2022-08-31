@@ -4,8 +4,7 @@ import { Repository } from 'typeorm';
 export declare class UsuariosService {
     private readonly usuarioRepositorio;
     constructor(usuarioRepositorio: Repository<Usuarios>);
-    findUsuario(): {
-        message: string;
-    };
+    findUsuarios(): Promise<Usuarios[]>;
+    findUsuario(email: string): Promise<Usuarios>;
     createUser(createUsuario: UsuariosDTO): Promise<Usuarios>;
 }

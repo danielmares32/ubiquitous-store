@@ -7,10 +7,11 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UsuariosService {
     constructor(@InjectRepository(Usuarios) private readonly usuarioRepositorio: Repository<Usuarios>){}
-    findUsuario(){
-        return {
-            message: 'Hi'
-        }
+    findUsuarios(){
+        return this.usuarioRepositorio.find();
+    }
+    findUsuario(email:string){
+        return this.usuarioRepositorio.findOneBy({email:email}); 
     }
     createUser(createUsuario:UsuariosDTO){
         const newUser = this.usuarioRepositorio.create(createUsuario);
