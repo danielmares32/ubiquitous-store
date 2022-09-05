@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const Usuarios_1 = require("../../../entities/Usuarios");
 const typeorm_2 = require("typeorm");
+const bcrypt = require("bcrypt");
 let UsuariosService = class UsuariosService {
     constructor(usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
@@ -24,10 +25,31 @@ let UsuariosService = class UsuariosService {
     findUsuarios() {
         return this.usuarioRepositorio.find();
     }
-    findUsuario(email) {
-        return this.usuarioRepositorio.findOneBy({ email: email });
+    findUsuario(user) {
+        console.log("El usuario que llega es: " + JSON.stringify(user));
+        return this.usuarioRepositorio.find({
+            where: {
+                email: user.email
+            }
+        }).then(async (data) => {
+            console.log(data);
+            let tempUser = data[0];
+            console.log("Encrypted: " + tempUser.password);
+            console.log("Plain Text: " + user.password);
+            const isPasswordMatching = await bcrypt.compare(user.password, tempUser.password);
+            console.log(isPasswordMatching);
+            if (isPasswordMatching) {
+                return JSON.stringify(tempUser);
+            }
+            else {
+                return JSON.stringify({ message: "Usuario O Contraseña Incorrecto" });
+            }
+        });
     }
-    createUser(createUsuario) {
+    async createUser(createUsuario) {
+        const passwordInPlaintext = createUsuario.password;
+        const hash = await bcrypt.hash(passwordInPlaintext, 10);
+        createUsuario.password = hash;
         const newUser = this.usuarioRepositorio.create(createUsuario);
         return this.usuarioRepositorio.save(newUser);
     }

@@ -9,9 +9,10 @@ export class UsuariosController {
     getUsuarios(){
         return this.usuariosService.findUsuarios();
     }
-    @Get(':nombre')
-    getUsuario(@Param() params){
-        return this.usuariosService.findUsuario(params.nombre);
+    @Post('')
+    getUsuario(@Body() userDto: UsuariosDTO){
+        console.log(userDto);
+        return this.usuariosService.findUsuario(userDto);
     }
     @Post('create')
     @UsePipes(ValidationPipe)

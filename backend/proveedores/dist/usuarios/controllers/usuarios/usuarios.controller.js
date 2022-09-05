@@ -23,8 +23,9 @@ let UsuariosController = class UsuariosController {
     getUsuarios() {
         return this.usuariosService.findUsuarios();
     }
-    getUsuario(params) {
-        return this.usuariosService.findUsuario(params.nombre);
+    getUsuario(userDto) {
+        console.log(userDto);
+        return this.usuariosService.findUsuario(userDto);
     }
     addUsuarios(createUserDto) {
         return this.usuariosService.createUser(createUserDto);
@@ -37,10 +38,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsuariosController.prototype, "getUsuarios", null);
 __decorate([
-    (0, common_1.Get)(':nombre'),
-    __param(0, (0, common_1.Param)()),
+    (0, common_1.Post)(''),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [usuarios_dto_1.UsuariosDTO]),
     __metadata("design:returntype", void 0)
 ], UsuariosController.prototype, "getUsuario", null);
 __decorate([

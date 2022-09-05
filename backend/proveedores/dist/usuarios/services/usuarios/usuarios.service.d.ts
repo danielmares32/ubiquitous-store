@@ -5,6 +5,6 @@ export declare class UsuariosService {
     private readonly usuarioRepositorio;
     constructor(usuarioRepositorio: Repository<Usuarios>);
     findUsuarios(): Promise<Usuarios[]>;
-    findUsuario(email: string): Promise<Usuarios>;
+    findUsuario(user: UsuariosDTO): Promise<string>;
     createUser(createUsuario: UsuariosDTO): Promise<Usuarios>;
 }
