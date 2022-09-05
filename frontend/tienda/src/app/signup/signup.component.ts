@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { RestApiService } from '../shared/rest-api.service';
 import { Usuario } from '../shared/usuario';
 
@@ -23,9 +24,18 @@ export class SignupComponent implements OnInit {
       console.log(this.user);
       this.restapi.createUsuario(this.user).subscribe((data)=>{
         console.log(data);
+        Swal.fire(
+          'CORRECTO!',
+          'Usuario Registrado Correctamente',
+          'success'
+        );
       });
     } else {
-      alert('Las contraseñas no coinciden');
+      Swal.fire(
+        'ERRPR',
+        'Las contraseñas no coinciden',
+        'error'
+      )
     }
     
   }

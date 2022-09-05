@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { RestApiService } from '../shared/rest-api.service';
 import { Usuario } from '../shared/usuario';
 
@@ -21,13 +22,21 @@ export class LoginComponent implements OnInit {
     user.password=this.password;
     this.restapi.getUsuario(user).subscribe((data:any)=>{
       console.log(data);
-      if(data!=null){
-        alert('Login Exitoso');
+      if(data.message==null){
+        Swal.fire(
+          'Correcto!',
+          'Inicio de Sesión Exitoso',
+          'success'
+        );
         sessionStorage.setItem('id', data.id);
         sessionStorage.setItem('nombre', data.nombre);
         sessionStorage.setItem('email',data.email);
       } else {
-        alert('Usuario o contraseña incorrectos');
+        Swal.fire(
+          'ERROR',
+          'Usuario o Contraseña Incorrecto',
+          'error'
+        );
       }
     })
   }
