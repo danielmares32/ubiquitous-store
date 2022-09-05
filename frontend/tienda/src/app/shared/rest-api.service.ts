@@ -26,9 +26,10 @@ export class RestApiService {
       .pipe(retry(1), catchError(this.handleError));
   }
   // HttpClient API get() method => Fetch employee
-  getUsuario(id: any): Observable<Usuario> {
+  getUsuario(usuario: any): Observable<Usuario> {
+    console.log(JSON.stringify(usuario));
     return this.http
-      .get<Usuario>(this.apiURL + '/usuarios/' + id)
+      .post<Usuario>(this.apiURL + '/usuarios/',JSON.stringify(usuario),this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
   // HttpClient API post() method => Create employee

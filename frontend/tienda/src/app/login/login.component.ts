@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../shared/rest-api.service';
+import { Usuario } from '../shared/usuario';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,16 @@ export class LoginComponent implements OnInit {
   }
 
   send(): void{ 
-    this.restapi.getUsuario(this.email).subscribe((data:any)=>{
-      if(data!=null && data.password==this.password){
+    let user:Usuario = {} as Usuario;
+    user.email=this.email;
+    user.password=this.password;
+    this.restapi.getUsuario(user).subscribe((data:any)=>{
+      console.log(data);
+      if(data!=null){
         alert('Login Exitoso');
+        sessionStorage.setItem('id', data.id);
+        sessionStorage.setItem('nombre', data.nombre);
+        sessionStorage.setItem('email',data.email);
       } else {
         alert('Usuario o contraseña incorrectos');
       }
