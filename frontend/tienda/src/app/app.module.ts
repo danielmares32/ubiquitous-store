@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { EmpresasComponent } from './empresas/empresas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     FootComponent,
     NavbarComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    EmpresasComponent
   ],
   imports: [
     BrowserModule,
