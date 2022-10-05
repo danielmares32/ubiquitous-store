@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { EmpresasComponent } from './empresas/empresas.component';
+import { ProductosComponent } from './productos/productos.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EmpresasComponent } from './empresas/empresas.component';
     NavbarComponent,
     SignupComponent,
     HomeComponent,
-    EmpresasComponent
+    EmpresasComponent,
+    ProductosComponent
   ],
   imports: [
     BrowserModule,
