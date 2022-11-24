@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('id', data.id);
         sessionStorage.setItem('nombre', data.nombre);
         sessionStorage.setItem('email',data.email);
+        
       } else {
         Swal.fire(
           'ERROR',

@@ -1,14 +1,15 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tienda": {
+    "tienda2": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -16,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tienda",
+            "outputPath": "dist/tienda2",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -26,7 +27,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@nebular/theme/styles/prebuilt/default.css",
+              "src/styles.css",
+              "src/assets/bootstrap/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -67,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "tienda:build:production"
+              "browserTarget": "tienda2:build:production"
             },
             "development": {
-              "browserTarget": "tienda:build:development"
+              "browserTarget": "tienda2:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tienda:build"
+            "browserTarget": "tienda2:build"
           }
         },
         "test": {
@@ -100,5 +103,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "tienda2"
 }

@@ -6,11 +6,24 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-                <!--<li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-                <li class="nav-item"><a class="nav-link" href="product.html">Product</a></li>
+                
+                <li *ngIf="userName!=null" class="nav-item"><a class="nav-link" href="empresas">Empresas</a></li>
+                <li *ngIf="userName!=null" class="nav-item"><a class="nav-link" href="productos">Productos</a></li>
+                <li *ngIf="userName!=null" class="nav-item"><a class="nav-link" href="chat">Chat</a></li>
+                <!--<li class="nav-item"><a class="nav-link" href="product.html">Product</a></li>
                 <li class="nav-item"><a class="nav-link" href="shopping-cart.html">Shopping Cart</a></li>-->
-                <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
-            </ul><a class="btn btn-primary shadow" role="button" href="/signup">Sign up</a>
+                <div *ngIf="userName!=null">
+                    <li class="nav-item"><a class="nav-link" href="#">Bienvenido Daniel</a></li>
+                </div>
+                <div *ngIf="userName==null">
+                    <li class="nav-item"><a class="nav-link" href="/login">Log in</a></li>
+                </div>
+                
+
+            </ul>
+            <div *ngIf="userName==null">
+                <a class="btn btn-primary shadow" role="button" href="/signup">Sign up</a>
+            </div>
         </div>
     </div>
 </nav>
