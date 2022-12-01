@@ -9,6 +9,8 @@ import { Productos } from './entities/Productos';
 import { ProductosOrdenes } from './entities/ProductosOrdenes';
 import { Proveedores } from './entities/Proveedores';
 import { Usuarios } from './entities/Usuarios';
+import { Chat } from './entities/chat.entity';
+import { AppGateway } from './app.gateway';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,10 +20,10 @@ import { Usuarios } from './entities/Usuarios';
     username: 'root',
     password: 'password',
     database: 'tiendaproveedores',
-    entities: [Catergorias, Ordenes, Productos, ProductosOrdenes, Proveedores, Usuarios],
+    entities: [Catergorias, Ordenes, Productos, ProductosOrdenes, Proveedores, Usuarios, Chat],
     synchronize: true,
-  }), UsuariosModule],
+  }),TypeOrmModule.forFeature([Chat]), UsuariosModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppGateway],
 })
 export class AppModule {}

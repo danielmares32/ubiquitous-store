@@ -18,6 +18,8 @@ const Productos_1 = require("./entities/Productos");
 const ProductosOrdenes_1 = require("./entities/ProductosOrdenes");
 const Proveedores_1 = require("./entities/Proveedores");
 const Usuarios_1 = require("./entities/Usuarios");
+const chat_entity_1 = require("./entities/chat.entity");
+const app_gateway_1 = require("./app.gateway");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -29,11 +31,11 @@ AppModule = __decorate([
                 username: 'root',
                 password: 'password',
                 database: 'tiendaproveedores',
-                entities: [Catergorias_1.Catergorias, Ordenes_1.Ordenes, Productos_1.Productos, ProductosOrdenes_1.ProductosOrdenes, Proveedores_1.Proveedores, Usuarios_1.Usuarios],
+                entities: [Catergorias_1.Catergorias, Ordenes_1.Ordenes, Productos_1.Productos, ProductosOrdenes_1.ProductosOrdenes, Proveedores_1.Proveedores, Usuarios_1.Usuarios, chat_entity_1.Chat],
                 synchronize: true,
-            }), usuarios_module_1.UsuariosModule],
+            }), typeorm_1.TypeOrmModule.forFeature([chat_entity_1.Chat]), usuarios_module_1.UsuariosModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, app_gateway_1.AppGateway],
     })
 ], AppModule);
 exports.AppModule = AppModule;
