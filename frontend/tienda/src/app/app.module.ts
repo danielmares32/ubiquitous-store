@@ -16,6 +16,9 @@ import { HomeComponent } from './home/home.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ChatComponent } from './chat/chat.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -40,7 +43,7 @@ import { ChatComponent } from './chat/chat.component';
     NbLayoutModule,
     NbEvaIconsModule,
     NbChatModule,
-    
+    SocketIoModule.forRoot(config)
 
   ],
   providers: [],

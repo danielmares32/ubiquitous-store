@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Chat } from '../shared/chat';
+import { RestApiService } from '../shared/rest-api.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-chat',
@@ -6,32 +9,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
-  constructor() { }
+  userName:string='';
+  constructor(private socket: Socket) { }
   ngOnInit(): void {
-      
+    this.userName=sessionStorage.getItem('nombre')!;
+    this.socket.on('recMessage',(data:Chat)=>{
+      console.log(data);
+      //this.messages.push(data);
+      let reply = (sessionStorage.getItem('email')==data.email) ? false : true;
+
+      //let avatar = (sessionStorage.getItem('email')==data.email) ? 'https://i.gifer.com/no.gif' : 'http://www.reactiongifs.com/r/wnd1.gif';
+      this.messages.push({
+        text: data.text,
+        date: data.createdAt,
+        reply: reply,
+        user: {
+          name: data.email,
+          avatar: 'http://www.reactiongifs.com/r/wnd1.gif',
+        },
+      });
+    });
   }
   messages: any[] = [];
 
-  sendMessage(event: any, userName: string, avatar: string, reply: boolean) {
-    const files = !event.files ? [] : event.files.map((file: { src: any; type: any; }) => {
-      return {
-        url: file.src,
-        type: file.type,
-        icon: 'file-text-outline',
-      };
-    });
+  
+  sendMessageSocket(message:Chat){
+    this.socket.emit('sendMessage', message);
+  }
 
-    this.messages.push({
-      text: event.message,
-      date: new Date(),
-      reply: reply,
-      type: files.length ? 'file' : 'text',
-      files: files,
-      user: {
-        name: userName,
-        avatar: avatar,
-      },
-    });
+  sendMessage(event: any) {
+    this.sendMessageSocket({email:sessionStorage.getItem('email'),text:event.message,createdAt:new Date()} as Chat);
+
+   
   }
   
 

@@ -3,12 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Usuario } from './usuario';
+import { Chat } from './chat';
+
 @Injectable({
   providedIn: 'root',
 })
 export class RestApiService {
   // Define API
   apiURL = 'http://localhost:3000';
+
   constructor(private http: HttpClient) {}
   /*========================================
     CRUD Methods for consuming RESTful API
@@ -18,7 +21,8 @@ export class RestApiService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
-  };
+  };  
+
   // HttpClient API get() method => Fetch employees list
   getUsuarios(): Observable<Usuario> {
     return this.http
@@ -59,6 +63,9 @@ export class RestApiService {
       .delete<Usuario>(this.apiURL + '/usuarios/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
+
+
+
   // Error handling
   handleError(error: any) {
     let errorMessage = '';
